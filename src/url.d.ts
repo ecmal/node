@@ -1,4 +1,3 @@
-// testing
 export interface Url {
     href?: string;
     protocol?: string;
@@ -14,6 +13,6 @@ export interface Url {
     path?: string;
 }
 
-export declare function parse(urlStr: string, parseQueryString?: boolean , slashesDenoteHost?: boolean ): Url;
-export declare function format(url: Url): string;
-export declare function resolve(from: string, to: string): string;
+export function parse(urlStr: string, parseQueryString?: boolean , slashesDenoteHost?: boolean ): Url;
+export function format(url: Url): string;
+export function resolve(from: string, to: string): string;
