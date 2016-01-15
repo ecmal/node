@@ -2,5 +2,10 @@
   "name"    : "node",
   "vendor"  : "ecmal",
   "version" : "0.0.1",
-  "main"    : "index"
+  "main"    : "index",
+  "directories"   : {
+    "source"      : "src",
+    "output"      : "out",
+    "vendor"      : "out"
+  }
 }
