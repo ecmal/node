@@ -1,3 +1,4 @@
+///<reference path="index.d.ts"/>
 import * as events from "node/events";
 
 export class Domain extends events.EventEmitter {

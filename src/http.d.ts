@@ -1,3 +1,4 @@
+///<reference path="index.d.ts"/>
 import * as events from "node/events";
 import * as net from "node/net";
 import * as stream from "node/stream";

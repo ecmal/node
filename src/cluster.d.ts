@@ -1,3 +1,4 @@
+///<reference path="index.d.ts"/>
 import * as child from "node/child_process";
 import * as events from "node/events";
 

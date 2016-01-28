@@ -1,3 +1,4 @@
+///<reference path="index.d.ts"/>
 import * as crypto from "node/crypto";
 import * as net from "node/net";
 import * as stream from "node/stream";

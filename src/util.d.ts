@@ -1,3 +1,4 @@
+///<reference path="index.d.ts"/>
 export interface InspectOptions {
     showHidden?: boolean;
     depth?: number;

@@ -1,3 +1,4 @@
+///<reference path="index.d.ts"/>
 function internal (value: any, message?: string): void;
 module internal {
     export class AssertionError implements Error {

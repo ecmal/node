@@ -1,3 +1,4 @@
+///<reference path="index.d.ts"/>
 import * as net from "node/net";
 
 export function isatty(fd: number): boolean;

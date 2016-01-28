@@ -1,3 +1,4 @@
+///<reference path="index.d.ts"/>
 export var E2BIG: number;
 export var EACCES: number;
 export var EADDRINUSE: number;
