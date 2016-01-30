@@ -1,4 +1,3 @@
-///<reference path="index.d.ts"/>
 import * as stream from "./stream";
 import * as events from "./events";
 

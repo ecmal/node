@@ -1,6 +1,5 @@
-///<reference path="index.d.ts"/>
-function internal (value: any, message?: string): void;
-module internal {
+declare function internal (value: any, message?: string): void;
+declare namespace internal {
     export class AssertionError implements Error {
         name: string;
         message: string;
@@ -39,4 +38,4 @@ module internal {
 
     export function ifError(value: any): void;
 }
-export = internal;
+export default internal;

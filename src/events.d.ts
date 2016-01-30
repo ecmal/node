@@ -1,4 +1,3 @@
-///<reference path="index.d.ts"/>
 export class EventEmitter implements NodeJS.EventEmitter {
     static listenerCount(emitter: EventEmitter, event: string): number;
 

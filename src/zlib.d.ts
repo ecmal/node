@@ -1,4 +1,3 @@
-///<reference path="index.d.ts"/>
 import * as stream from "./stream";
 export interface ZlibOptions { chunkSize?: number; windowBits?: number; level?: number; memLevel?: number; strategy?: number; dictionary?: any; }
 

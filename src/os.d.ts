@@ -1,4 +1,3 @@
-///<reference path="index.d.ts"/>
 export function tmpdir(): string;
 export function hostname(): string;
 export function type(): string;

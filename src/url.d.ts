@@ -1,4 +1,3 @@
-///<reference path="index.d.ts"/>
 export interface Url {
     href?: string;
     protocol?: string;

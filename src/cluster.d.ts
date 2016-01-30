@@ -1,6 +1,5 @@
-///<reference path="index.d.ts"/>
-import * as child from "node/child_process";
-import * as events from "node/events";
+import * as child from "./child_process";
+import * as events from "./events";
 
 export interface ClusterSettings {
     exec?: string;

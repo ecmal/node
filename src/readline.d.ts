@@ -1,6 +1,5 @@
-///<reference path="index.d.ts"/>
-import * as events from "node/events";
-import * as stream from "node/stream";
+import * as events from "./events";
+import * as stream from "./stream";
 
 export interface ReadLine extends events.EventEmitter {
     setPrompt(prompt: string): void;

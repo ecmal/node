@@ -1,4 +1,3 @@
-///<reference path="index.d.ts"/>
 import * as stream from "node/stream";
 
 export interface Socket extends stream.Duplex {

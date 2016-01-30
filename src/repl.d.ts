@@ -1,6 +1,5 @@
-///<reference path="index.d.ts"/>
-import * as stream from "node/stream";
-import * as events from "node/events";
+import * as stream from "./stream";
+import * as events from "./events";
 
 export interface ReplOptions {
     prompt?: string;

@@ -1,5 +1,4 @@
-///<reference path="index.d.ts"/>
-import * as events from "node/events";
+import * as events from "./events";
 
 interface RemoteInfo {
     address: string;

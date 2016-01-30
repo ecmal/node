@@ -1,10 +1,9 @@
-///<reference path="index.d.ts"/>
-import * as crypto from "node/crypto";
-import * as net from "node/net";
-import * as stream from "node/stream";
+import * as crypto from "./crypto";
+import * as net from "./net";
+import * as stream from "./stream";
 
-var CLIENT_RENEG_LIMIT: number;
-var CLIENT_RENEG_WINDOW: number;
+declare var CLIENT_RENEG_LIMIT: number;
+declare var CLIENT_RENEG_WINDOW: number;
 
 export interface TlsOptions {
     pfx?: any;   //string or buffer
@@ -90,9 +89,9 @@ export interface SecureContext {
     context: any;
 }
 
-export function createServer(options: TlsOptions, secureConnectionListener?: (cleartextStream: ClearTextStream) =>void ): Server;
-export function connect(options: TlsOptions, secureConnectionListener?: () =>void ): ClearTextStream;
-export function connect(port: number, host?: string, options?: ConnectionOptions, secureConnectListener?: () =>void ): ClearTextStream;
-export function connect(port: number, options?: ConnectionOptions, secureConnectListener?: () =>void ): ClearTextStream;
-export function createSecurePair(credentials?: crypto.Credentials, isServer?: boolean, requestCert?: boolean, rejectUnauthorized?: boolean): SecurePair;
-export function createSecureContext(details: SecureContextOptions): SecureContext;
+export declare function createServer(options: TlsOptions, secureConnectionListener?: (cleartextStream: ClearTextStream) =>void ): Server;
+export declare function connect(options: TlsOptions, secureConnectionListener?: () =>void ): ClearTextStream;
+export declare function connect(port: number, host?: string, options?: ConnectionOptions, secureConnectListener?: () =>void ): ClearTextStream;
+export declare function connect(port: number, options?: ConnectionOptions, secureConnectListener?: () =>void ): ClearTextStream;
+export declare function createSecurePair(credentials?: crypto.Credentials, isServer?: boolean, requestCert?: boolean, rejectUnauthorized?: boolean): SecurePair;
+export declare function createSecureContext(details: SecureContextOptions): SecureContext;

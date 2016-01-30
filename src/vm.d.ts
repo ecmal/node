@@ -1,4 +1,3 @@
-///<reference path="index.d.ts"/>
 export interface Context { }
 export interface Script {
     runInThisContext(): void;

@@ -1,4 +1,3 @@
-///<reference path="index.d.ts"/>
 import * as tls from "node/tls";
 import * as events from "node/events";
 import * as http from "node/http";
