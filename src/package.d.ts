@@ -9,50 +9,15 @@
  *                                               *
  ************************************************/
 
-interface Error {
-    stack?: string;
-}
-
-
-// compat for TypeScript 1.5.3
-// if you use with --target es3 or --target es5 and use below definitions,
-// use the core.d.ts that is bundled with TypeScript 1.5.3.
-interface MapConstructor {}
-interface WeakMapConstructor {}
-interface SetConstructor {}
-interface WeakSetConstructor {}
-
-/************************************************
- *                                               *
- *                   GLOBAL                      *
- *                                               *
- ************************************************/
-declare var process: NodeJS.Process;
-declare var global: NodeJS.Global;
-
-declare var __filename: string;
-declare var __dirname: string;
-
-declare function setTimeout(callback: (...args: any[]) => void, ms: number, ...args: any[]): NodeJS.Timer;
-declare function clearTimeout(timeoutId: NodeJS.Timer): void;
-declare function setInterval(callback: (...args: any[]) => void, ms: number, ...args: any[]): NodeJS.Timer;
-declare function clearInterval(intervalId: NodeJS.Timer): void;
-declare function setImmediate(callback: (...args: any[]) => void, ...args: any[]): any;
-declare function clearImmediate(immediateId: any): void;
-
 interface NodeRequireFunction {
     (id: string): any;
 }
-
 interface NodeRequire extends NodeRequireFunction {
     resolve(id:string): string;
     cache: any;
     extensions: any;
     main: any;
 }
-
-declare var require: NodeRequire;
-
 interface NodeModule {
     exports: any;
     require: NodeRequireFunction;
@@ -62,11 +27,6 @@ interface NodeModule {
     parent: any;
     children: any[];
 }
-
-declare var module: NodeModule;
-
-// Same as module.exports
-declare var exports: any;
 declare var SlowBuffer: {
     new (str: string, encoding?: string): Buffer;
     new (size: number): Buffer;
@@ -77,11 +37,8 @@ declare var SlowBuffer: {
     byteLength(string: string, encoding?: string): number;
     concat(list: Buffer[], totalLength?: number): Buffer;
 };
-
-
 // Buffer class
 interface Buffer extends NodeBuffer {}
-
 /**
  * Raw data is stored in instances of the Buffer class.
  * A Buffer is similar to an array of integers but corresponds to a raw memory allocation outside the V8 heap.  A Buffer cannot be resized.
