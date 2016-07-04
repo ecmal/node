@@ -58,6 +58,8 @@ export var Z_HUFFMAN_ONLY: number;
 export var Z_RLE: number;
 export var Z_FIXED: number;
 export var Z_DEFAULT_STRATEGY: number;
+export var Z_DEFAULT_MEMLEVEL: number;
+export var Z_DEFAULT_LEVEL: number;
 export var Z_BINARY: number;
 export var Z_TEXT: number;
 export var Z_ASCII: number;

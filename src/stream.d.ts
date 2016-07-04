@@ -1,6 +1,6 @@
 import * as events from "node/events";
 
-export interface Stream extends events.EventEmitter {
+export declare class Stream extends events.EventEmitter {
     pipe<T extends NodeJS.WritableStream>(destination: T, options?: { end?: boolean; }): T;
 }
 
@@ -67,6 +67,7 @@ export class Transform extends events.EventEmitter implements NodeJS.ReadWriteSt
     constructor(opts?: TransformOptions);
     _transform(chunk: any, encoding: string, callback: Function): void;
     _flush(callback: Function): void;
+    flush(callback: Function): void;
     read(size?: number): any;
     setEncoding(encoding: string): void;
     pause(): void;
