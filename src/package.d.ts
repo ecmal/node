@@ -303,7 +303,7 @@ interface NodeBuffer {
     toJSON(): any;
     length: number;
     equals(otherBuffer: Buffer): boolean;
-    compare(otherBuffer: Buffer): number;
+    compare(otherBuffer: Buffer,targetStart?: number,targetEnd?: number, sourceStart?: number, sourceEnd?: number): number;
     copy(targetBuffer: Buffer, targetStart?: number, sourceStart?: number, sourceEnd?: number): number;
     slice(start?: number, end?: number): Buffer;
     writeUIntLE(value: number, offset: number, byteLength: number, noAssert?: boolean): number;
@@ -342,7 +342,18 @@ interface NodeBuffer {
     writeFloatBE(value: number, offset: number, noAssert?: boolean): number;
     writeDoubleLE(value: number, offset: number, noAssert?: boolean): number;
     writeDoubleBE(value: number, offset: number, noAssert?: boolean): number;
-    fill(value: any, offset?: number, end?: number): Buffer;
+    fill(value: any, offset?: number, end?: number, encoding?: string): Buffer;
+    includes(value: string|Buffer|number, byteOffset?: number, encoding?: string):boolean;
+    indexOf(value: string|Buffer|number, byteOffset?: number, encoding?: string):number;
+    lastIndexOf(value: string|Buffer|number, byteOffset?: number, encoding?: string):number;
+
+    swap16():Buffer;
+    swap32():Buffer;
+    swap64():Buffer;
+
+    keys(): IterableIterator<number>;
+    values(): IterableIterator<number>;
+    entries(): IterableIterator<[number,number]>;
 }
 
 
