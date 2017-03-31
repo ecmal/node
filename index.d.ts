@@ -3610,6 +3610,401 @@ declare namespace NodeJS {
         export function execFileSync(command: string, args?: string[], options?: ExecFileSyncOptionsWithBufferEncoding): Buffer;
         export function execFileSync(command: string, args?: string[], options?: ExecFileSyncOptions): Buffer;
     }
+    export namespace Punycode {
+        export function decode(string: string): string;
+        export function encode(string: string): string;
+        export function toUnicode(domain: string): string;
+        export function toASCII(domain: string): string;
+        export var ucs2: ucs2;
+        interface ucs2 {
+            decode(string: string): number[];
+            encode(codePoints: number[]): string;
+        }
+        export var version: any;
+    }
+    export namespace Repl {
+        export interface ReplOptions {
+            prompt?: string;
+            input?: NodeJS.ReadableStream;
+            output?: NodeJS.WritableStream;
+            terminal?: boolean;
+            eval?: Function;
+            useColors?: boolean;
+            useGlobal?: boolean;
+            ignoreUndefined?: boolean;
+            writer?: Function;
+            completer?: Function;
+            replMode?: any;
+            breakEvalOnSigint?: any;
+        }
+
+        export interface REPLServer extends Readline.ReadLine {
+            defineCommand(keyword: string, cmd: Function | { help: string, action: Function }): void;
+            displayPrompt(preserveCursor?: boolean): void;
+
+            /**
+             * events.EventEmitter
+             * 1. exit
+             * 2. reset
+             **/
+
+            addListener(event: string, listener: Function): this;
+            addListener(event: "exit", listener: () => void): this;
+            addListener(event: "reset", listener: Function): this;
+
+            emit(event: string, ...args: any[]): boolean;
+            emit(event: "exit"): boolean;
+            emit(event: "reset", context: any): boolean;
+
+            on(event: string, listener: Function): this;
+            on(event: "exit", listener: () => void): this;
+            on(event: "reset", listener: Function): this;
+
+            once(event: string, listener: Function): this;
+            once(event: "exit", listener: () => void): this;
+            once(event: "reset", listener: Function): this;
+
+            prependListener(event: string, listener: Function): this;
+            prependListener(event: "exit", listener: () => void): this;
+            prependListener(event: "reset", listener: Function): this;
+
+            prependOnceListener(event: string, listener: Function): this;
+            prependOnceListener(event: "exit", listener: () => void): this;
+            prependOnceListener(event: "reset", listener: Function): this;
+        }
+
+        export function start(options: ReplOptions): REPLServer;
+    }
+    export namespace Readline {
+        export interface Key {
+            sequence?: string;
+            name?: string;
+            ctrl?: boolean;
+            meta?: boolean;
+            shift?: boolean;
+        }
+
+        export interface ReadLine extends EventEmitter {
+            setPrompt(prompt: string): void;
+            prompt(preserveCursor?: boolean): void;
+            question(query: string, callback: (answer: string) => void): void;
+            pause(): ReadLine;
+            resume(): ReadLine;
+            close(): void;
+            write(data: string | Buffer, key?: Key): void;
+
+            /**
+             * events.EventEmitter
+             * 1. close
+             * 2. line
+             * 3. pause
+             * 4. resume
+             * 5. SIGCONT
+             * 6. SIGINT
+             * 7. SIGTSTP
+             **/
+
+            addListener(event: string, listener: Function): this;
+            addListener(event: "close", listener: () => void): this;
+            addListener(event: "line", listener: (input: any) => void): this;
+            addListener(event: "pause", listener: () => void): this;
+            addListener(event: "resume", listener: () => void): this;
+            addListener(event: "SIGCONT", listener: () => void): this;
+            addListener(event: "SIGINT", listener: () => void): this;
+            addListener(event: "SIGTSTP", listener: () => void): this;
+
+            emit(event: string, ...args: any[]): boolean;
+            emit(event: "close"): boolean;
+            emit(event: "line", input: any): boolean;
+            emit(event: "pause"): boolean;
+            emit(event: "resume"): boolean;
+            emit(event: "SIGCONT"): boolean;
+            emit(event: "SIGINT"): boolean;
+            emit(event: "SIGTSTP"): boolean;
+
+            on(event: string, listener: Function): this;
+            on(event: "close", listener: () => void): this;
+            on(event: "line", listener: (input: any) => void): this;
+            on(event: "pause", listener: () => void): this;
+            on(event: "resume", listener: () => void): this;
+            on(event: "SIGCONT", listener: () => void): this;
+            on(event: "SIGINT", listener: () => void): this;
+            on(event: "SIGTSTP", listener: () => void): this;
+
+            once(event: string, listener: Function): this;
+            once(event: "close", listener: () => void): this;
+            once(event: "line", listener: (input: any) => void): this;
+            once(event: "pause", listener: () => void): this;
+            once(event: "resume", listener: () => void): this;
+            once(event: "SIGCONT", listener: () => void): this;
+            once(event: "SIGINT", listener: () => void): this;
+            once(event: "SIGTSTP", listener: () => void): this;
+
+            prependListener(event: string, listener: Function): this;
+            prependListener(event: "close", listener: () => void): this;
+            prependListener(event: "line", listener: (input: any) => void): this;
+            prependListener(event: "pause", listener: () => void): this;
+            prependListener(event: "resume", listener: () => void): this;
+            prependListener(event: "SIGCONT", listener: () => void): this;
+            prependListener(event: "SIGINT", listener: () => void): this;
+            prependListener(event: "SIGTSTP", listener: () => void): this;
+
+            prependOnceListener(event: string, listener: Function): this;
+            prependOnceListener(event: "close", listener: () => void): this;
+            prependOnceListener(event: "line", listener: (input: any) => void): this;
+            prependOnceListener(event: "pause", listener: () => void): this;
+            prependOnceListener(event: "resume", listener: () => void): this;
+            prependOnceListener(event: "SIGCONT", listener: () => void): this;
+            prependOnceListener(event: "SIGINT", listener: () => void): this;
+            prependOnceListener(event: "SIGTSTP", listener: () => void): this;
+        }
+
+        export interface Completer {
+            (line: string): CompleterResult;
+            (line: string, callback: (err: any, result: CompleterResult) => void): any;
+        }
+
+        export type CompleterResult = [string[], string];
+
+        export interface ReadLineOptions {
+            input: NodeJS.ReadableStream;
+            output?: NodeJS.WritableStream;
+            completer?: Completer;
+            terminal?: boolean;
+            historySize?: number;
+        }
+
+        export function createInterface(input: NodeJS.ReadableStream, output?: NodeJS.WritableStream, completer?: Completer, terminal?: boolean): ReadLine;
+        export function createInterface(options: ReadLineOptions): ReadLine;
+
+        export function cursorTo(stream: NodeJS.WritableStream, x: number, y: number): void;
+        export function moveCursor(stream: NodeJS.WritableStream, dx: number | string, dy: number | string): void;
+        export function clearLine(stream: NodeJS.WritableStream, dir: number): void;
+        export function clearScreenDown(stream: NodeJS.WritableStream): void;
+    }
+    export namespace Vm {
+        export interface Context { }
+        export interface ScriptOptions {
+            filename?: string;
+            lineOffset?: number;
+            columnOffset?: number;
+            displayErrors?: boolean;
+            timeout?: number;
+            cachedData?: Buffer;
+            produceCachedData?: boolean;
+        }
+        export interface RunningScriptOptions {
+            filename?: string;
+            lineOffset?: number;
+            columnOffset?: number;
+            displayErrors?: boolean;
+            timeout?: number;
+        }
+        export class Script {
+            constructor(code: string, options?: ScriptOptions);
+            runInContext(contextifiedSandbox: Context, options?: RunningScriptOptions): any;
+            runInNewContext(sandbox?: Context, options?: RunningScriptOptions): any;
+            runInThisContext(options?: RunningScriptOptions): any;
+        }
+        export function createContext(sandbox?: Context): Context;
+        export function isContext(sandbox: Context): boolean;
+        export function runInContext(code: string, contextifiedSandbox: Context, options?: RunningScriptOptions): any;
+        export function runInDebugContext(code: string): any;
+        export function runInNewContext(code: string, sandbox?: Context, options?: RunningScriptOptions): any;
+        export function runInThisContext(code: string, options?: RunningScriptOptions): any;
+    }
+    export namespace V8 {
+        interface HeapSpaceInfo {
+            space_name: string;
+            space_size: number;
+            space_used_size: number;
+            space_available_size: number;
+            physical_space_size: number;
+        }
+
+        //** Signifies if the --zap_code_space option is enabled or not.  1 == enabled, 0 == disabled. */
+        type DoesZapCodeSpaceFlag = 0 | 1;
+
+        interface HeapInfo {
+            total_heap_size: number;
+            total_heap_size_executable: number;
+            total_physical_size: number;
+            total_available_size: number;
+            used_heap_size: number;
+            heap_size_limit: number;
+            malloced_memory: number;
+            peak_malloced_memory: number;
+            does_zap_garbage: DoesZapCodeSpaceFlag;
+        }
+
+        export function getHeapStatistics(): HeapInfo;
+        export function getHeapSpaceStatistics(): HeapSpaceInfo[];
+        export function setFlagsFromString(flags: string): void;
+    }
+
+    interface AssertionError extends Error {}
+    interface AssertionErrorConstructor {
+        new(options?: {
+            message?: string; actual?: any; expected?: any;
+            operator?: string; stackStartFunction?: Function
+        }):AssertionError
+    }
+
+    interface Assert {
+        (value: any, message?: string): void;
+        AssertionError:AssertionErrorConstructor;
+        fail(actual: any, expected: any, message: string, operator: string): void;
+        ok(value: any, message?: string): void;
+        equal(actual: any, expected: any, message?: string): void;
+        notEqual(actual: any, expected: any, message?: string): void;
+        deepEqual(actual: any, expected: any, message?: string): void;
+        notDeepEqual(acutal: any, expected: any, message?: string): void;
+        strictEqual(actual: any, expected: any, message?: string): void;
+        notStrictEqual(actual: any, expected: any, message?: string): void;
+        deepStrictEqual(actual: any, expected: any, message?: string): void;
+        notDeepStrictEqual(actual: any, expected: any, message?: string): void;
+        throws(block: Function, message?: string): void;
+        throws(block: Function, error: Function, message?: string): void;
+        throws(block: Function, error: RegExp, message?: string): void;
+        throws(block: Function, error: (err: any) => boolean, message?: string): void;
+        doesNotThrow(block: Function, message?: string): void;
+        doesNotThrow(block: Function, error: Function, message?: string): void;
+        doesNotThrow(block: Function, error: RegExp, message?: string): void;
+        doesNotThrow(block: Function, error: (err: any) => boolean, message?: string): void;
+        ifError(value: any): void
+    }
+
+    export namespace Timers {
+        export function setTimeout(callback: (...args: any[]) => void, ms: number, ...args: any[]): NodeJS.Timer;
+        export function clearTimeout(timeoutId: NodeJS.Timer): void;
+        export function setInterval(callback: (...args: any[]) => void, ms: number, ...args: any[]): NodeJS.Timer;
+        export function clearInterval(intervalId: NodeJS.Timer): void;
+        export function setImmediate(callback: (...args: any[]) => void, ...args: any[]): any;
+        export function clearImmediate(immediateId: any): void;
+    }
+
+    export namespace Debugger {
+        export interface Packet {
+            raw: string;
+            headers: string[];
+            body: Message;
+        }
+
+        export interface Message {
+            seq: number;
+            type: string;
+        }
+
+        export interface RequestInfo {
+            command: string;
+            arguments: any;
+        }
+
+        export interface Request extends Message, RequestInfo {
+        }
+
+        export interface Event extends Message {
+            event: string;
+            body?: any;
+        }
+
+        export interface Response extends Message {
+            request_seq: number;
+            success: boolean;
+            /** Contains error message if success === false. */
+            message?: string;
+            /** Contains message body if success === true. */
+            body?: any;
+        }
+
+        export interface BreakpointMessageBody {
+            type: string;
+            target: number;
+            line: number;
+        }
+
+        export class Protocol {
+            res: Packet;
+            state: string;
+            execute(data: string): void;
+            serialize(rq: Request): string;
+            onResponse: (pkt: Packet) => void;
+        }
+
+        export var NO_FRAME: number;
+        export var port: number;
+
+        export interface ScriptDesc {
+            name: string;
+            id: number;
+            isNative?: boolean;
+            handle?: number;
+            type: string;
+            lineOffset?: number;
+            columnOffset?: number;
+            lineCount?: number;
+        }
+
+        export interface Breakpoint {
+            id: number;
+            scriptId: number;
+            script: ScriptDesc;
+            line: number;
+            condition?: string;
+            scriptReq?: string;
+        }
+
+        export interface RequestHandler {
+            (err: boolean, body: Message, res: Packet): void;
+            request_seq?: number;
+        }
+
+        export interface ResponseBodyHandler {
+            (err: boolean, body?: any): void;
+            request_seq?: number;
+        }
+
+        export interface ExceptionInfo {
+            text: string;
+        }
+
+        export interface BreakResponse {
+            script?: ScriptDesc;
+            exception?: ExceptionInfo;
+            sourceLine: number;
+            sourceLineText: string;
+            sourceColumn: number;
+        }
+
+        export function SourceInfo(body: BreakResponse): string;
+
+        export interface ClientInstance extends NodeJS.EventEmitter {
+            protocol: Protocol;
+            scripts: ScriptDesc[];
+            handles: ScriptDesc[];
+            breakpoints: Breakpoint[];
+            currentSourceLine: number;
+            currentSourceColumn: number;
+            currentSourceLineText: string;
+            currentFrame: number;
+            currentScript: string;
+
+            connect(port: number, host: string): void;
+            req(req: any, cb: RequestHandler): void;
+            reqFrameEval(code: string, frame: number, cb: RequestHandler): void;
+            mirrorObject(obj: any, depth: number, cb: ResponseBodyHandler): void;
+            setBreakpoint(rq: BreakpointMessageBody, cb: RequestHandler): void;
+            clearBreakpoint(rq: Request, cb: RequestHandler): void;
+            listbreakpoints(cb: RequestHandler): void;
+            reqSource(from: number, to: number, cb: RequestHandler): void;
+            reqScripts(cb: any): void;
+            reqContinue(cb: RequestHandler): void;
+        }
+
+        export var Client : {
+            new (): ClientInstance
+        }
+    }
 
     interface RequireFunction {
         (id:"events"):typeof EventEmitter
@@ -3632,6 +4027,18 @@ declare namespace NodeJS {
         (id:"tty"):typeof Tty;
         (id:"domain"):typeof DomainNode;
         (id:"constants"):typeof Constants;
+        (id:"buffer"):typeof Buffer;
+        (id:"cluster"):typeof Cluster;
+        (id:"child_process"):typeof ChildProcess;
+        (id:"punycode"):typeof Punycode;
+        (id:"repl"):typeof Repl;
+        (id:"readline"):typeof Readline;
+        (id:"vm"):typeof Vm;
+        (id:"assert"): Assert;
+        (id:"v8"):typeof V8;
+        (id:"timers"):typeof Timers;
+        (id:"console"):typeof console;
+        (id:"_debugger"):typeof console;
         (id: string): any;
     }
 }
@@ -3736,216 +4143,19 @@ declare module "https" {
 }
 
 declare module "punycode" {
-    export function decode(string: string): string;
-    export function encode(string: string): string;
-    export function toUnicode(domain: string): string;
-    export function toASCII(domain: string): string;
-    export var ucs2: ucs2;
-    interface ucs2 {
-        decode(string: string): number[];
-        encode(codePoints: number[]): string;
-    }
-    export var version: any;
+    export = NodeJS.Punycode;
 }
 
 declare module "repl" {
-    import * as stream from "stream";
-    import * as readline from "readline";
-
-    export interface ReplOptions {
-        prompt?: string;
-        input?: NodeJS.ReadableStream;
-        output?: NodeJS.WritableStream;
-        terminal?: boolean;
-        eval?: Function;
-        useColors?: boolean;
-        useGlobal?: boolean;
-        ignoreUndefined?: boolean;
-        writer?: Function;
-        completer?: Function;
-        replMode?: any;
-        breakEvalOnSigint?: any;
-    }
-
-    export interface REPLServer extends readline.ReadLine {
-        defineCommand(keyword: string, cmd: Function | { help: string, action: Function }): void;
-        displayPrompt(preserveCursor?: boolean): void;
-
-        /**
-         * events.EventEmitter
-         * 1. exit
-         * 2. reset
-         **/
-
-        addListener(event: string, listener: Function): this;
-        addListener(event: "exit", listener: () => void): this;
-        addListener(event: "reset", listener: Function): this;
-
-        emit(event: string, ...args: any[]): boolean;
-        emit(event: "exit"): boolean;
-        emit(event: "reset", context: any): boolean;
-
-        on(event: string, listener: Function): this;
-        on(event: "exit", listener: () => void): this;
-        on(event: "reset", listener: Function): this;
-
-        once(event: string, listener: Function): this;
-        once(event: "exit", listener: () => void): this;
-        once(event: "reset", listener: Function): this;
-
-        prependListener(event: string, listener: Function): this;
-        prependListener(event: "exit", listener: () => void): this;
-        prependListener(event: "reset", listener: Function): this;
-
-        prependOnceListener(event: string, listener: Function): this;
-        prependOnceListener(event: "exit", listener: () => void): this;
-        prependOnceListener(event: "reset", listener: Function): this;
-    }
-
-    export function start(options: ReplOptions): REPLServer;
+    export = NodeJS.Punycode;
 }
 
 declare module "readline" {
-    import * as events from "events";
-    import * as stream from "stream";
-
-    export interface Key {
-        sequence?: string;
-        name?: string;
-        ctrl?: boolean;
-        meta?: boolean;
-        shift?: boolean;
-    }
-
-    export interface ReadLine extends events.EventEmitter {
-        setPrompt(prompt: string): void;
-        prompt(preserveCursor?: boolean): void;
-        question(query: string, callback: (answer: string) => void): void;
-        pause(): ReadLine;
-        resume(): ReadLine;
-        close(): void;
-        write(data: string | Buffer, key?: Key): void;
-
-        /**
-         * events.EventEmitter
-         * 1. close
-         * 2. line
-         * 3. pause
-         * 4. resume
-         * 5. SIGCONT
-         * 6. SIGINT
-         * 7. SIGTSTP
-         **/
-
-        addListener(event: string, listener: Function): this;
-        addListener(event: "close", listener: () => void): this;
-        addListener(event: "line", listener: (input: any) => void): this;
-        addListener(event: "pause", listener: () => void): this;
-        addListener(event: "resume", listener: () => void): this;
-        addListener(event: "SIGCONT", listener: () => void): this;
-        addListener(event: "SIGINT", listener: () => void): this;
-        addListener(event: "SIGTSTP", listener: () => void): this;
-
-        emit(event: string, ...args: any[]): boolean;
-        emit(event: "close"): boolean;
-        emit(event: "line", input: any): boolean;
-        emit(event: "pause"): boolean;
-        emit(event: "resume"): boolean;
-        emit(event: "SIGCONT"): boolean;
-        emit(event: "SIGINT"): boolean;
-        emit(event: "SIGTSTP"): boolean;
-
-        on(event: string, listener: Function): this;
-        on(event: "close", listener: () => void): this;
-        on(event: "line", listener: (input: any) => void): this;
-        on(event: "pause", listener: () => void): this;
-        on(event: "resume", listener: () => void): this;
-        on(event: "SIGCONT", listener: () => void): this;
-        on(event: "SIGINT", listener: () => void): this;
-        on(event: "SIGTSTP", listener: () => void): this;
-
-        once(event: string, listener: Function): this;
-        once(event: "close", listener: () => void): this;
-        once(event: "line", listener: (input: any) => void): this;
-        once(event: "pause", listener: () => void): this;
-        once(event: "resume", listener: () => void): this;
-        once(event: "SIGCONT", listener: () => void): this;
-        once(event: "SIGINT", listener: () => void): this;
-        once(event: "SIGTSTP", listener: () => void): this;
-
-        prependListener(event: string, listener: Function): this;
-        prependListener(event: "close", listener: () => void): this;
-        prependListener(event: "line", listener: (input: any) => void): this;
-        prependListener(event: "pause", listener: () => void): this;
-        prependListener(event: "resume", listener: () => void): this;
-        prependListener(event: "SIGCONT", listener: () => void): this;
-        prependListener(event: "SIGINT", listener: () => void): this;
-        prependListener(event: "SIGTSTP", listener: () => void): this;
-
-        prependOnceListener(event: string, listener: Function): this;
-        prependOnceListener(event: "close", listener: () => void): this;
-        prependOnceListener(event: "line", listener: (input: any) => void): this;
-        prependOnceListener(event: "pause", listener: () => void): this;
-        prependOnceListener(event: "resume", listener: () => void): this;
-        prependOnceListener(event: "SIGCONT", listener: () => void): this;
-        prependOnceListener(event: "SIGINT", listener: () => void): this;
-        prependOnceListener(event: "SIGTSTP", listener: () => void): this;
-    }
-
-    export interface Completer {
-        (line: string): CompleterResult;
-        (line: string, callback: (err: any, result: CompleterResult) => void): any;
-    }
-
-    export type CompleterResult = [string[], string];
-
-    export interface ReadLineOptions {
-        input: NodeJS.ReadableStream;
-        output?: NodeJS.WritableStream;
-        completer?: Completer;
-        terminal?: boolean;
-        historySize?: number;
-    }
-
-    export function createInterface(input: NodeJS.ReadableStream, output?: NodeJS.WritableStream, completer?: Completer, terminal?: boolean): ReadLine;
-    export function createInterface(options: ReadLineOptions): ReadLine;
-
-    export function cursorTo(stream: NodeJS.WritableStream, x: number, y: number): void;
-    export function moveCursor(stream: NodeJS.WritableStream, dx: number | string, dy: number | string): void;
-    export function clearLine(stream: NodeJS.WritableStream, dir: number): void;
-    export function clearScreenDown(stream: NodeJS.WritableStream): void;
+    export = NodeJS.Readline;
 }
 
 declare module "vm" {
-    export interface Context { }
-    export interface ScriptOptions {
-        filename?: string;
-        lineOffset?: number;
-        columnOffset?: number;
-        displayErrors?: boolean;
-        timeout?: number;
-        cachedData?: Buffer;
-        produceCachedData?: boolean;
-    }
-    export interface RunningScriptOptions {
-        filename?: string;
-        lineOffset?: number;
-        columnOffset?: number;
-        displayErrors?: boolean;
-        timeout?: number;
-    }
-    export class Script {
-        constructor(code: string, options?: ScriptOptions);
-        runInContext(contextifiedSandbox: Context, options?: RunningScriptOptions): any;
-        runInNewContext(sandbox?: Context, options?: RunningScriptOptions): any;
-        runInThisContext(options?: RunningScriptOptions): any;
-    }
-    export function createContext(sandbox?: Context): Context;
-    export function isContext(sandbox: Context): boolean;
-    export function runInContext(code: string, contextifiedSandbox: Context, options?: RunningScriptOptions): any;
-    export function runInDebugContext(code: string): any;
-    export function runInNewContext(code: string, sandbox?: Context, options?: RunningScriptOptions): any;
-    export function runInThisContext(code: string, options?: RunningScriptOptions): any;
+    export = NodeJS.Vm;
 }
 
 declare module "child_process" {
@@ -3996,53 +4206,6 @@ declare module "util" {
     export = NodeJS.Util;
 }
 
-declare module "assert" {
-    function internal(value: any, message?: string): void;
-    namespace internal {
-        export class AssertionError implements Error {
-            name: string;
-            message: string;
-            actual: any;
-            expected: any;
-            operator: string;
-            generatedMessage: boolean;
-
-            constructor(options?: {
-                message?: string; actual?: any; expected?: any;
-                operator?: string; stackStartFunction?: Function
-            });
-        }
-
-        export function fail(actual: any, expected: any, message: string, operator: string): void;
-        export function ok(value: any, message?: string): void;
-        export function equal(actual: any, expected: any, message?: string): void;
-        export function notEqual(actual: any, expected: any, message?: string): void;
-        export function deepEqual(actual: any, expected: any, message?: string): void;
-        export function notDeepEqual(acutal: any, expected: any, message?: string): void;
-        export function strictEqual(actual: any, expected: any, message?: string): void;
-        export function notStrictEqual(actual: any, expected: any, message?: string): void;
-        export function deepStrictEqual(actual: any, expected: any, message?: string): void;
-        export function notDeepStrictEqual(actual: any, expected: any, message?: string): void;
-        export var throws: {
-            (block: Function, message?: string): void;
-            (block: Function, error: Function, message?: string): void;
-            (block: Function, error: RegExp, message?: string): void;
-            (block: Function, error: (err: any) => boolean, message?: string): void;
-        };
-
-        export var doesNotThrow: {
-            (block: Function, message?: string): void;
-            (block: Function, error: Function, message?: string): void;
-            (block: Function, error: RegExp, message?: string): void;
-            (block: Function, error: (err: any) => boolean, message?: string): void;
-        };
-
-        export function ifError(value: any): void;
-    }
-
-    export = internal;
-}
-
 declare module "tty" {
     export = NodeJS.Tty;
 }
@@ -4060,170 +4223,5 @@ declare module "process" {
 }
 
 declare module "v8" {
-    interface HeapSpaceInfo {
-        space_name: string;
-        space_size: number;
-        space_used_size: number;
-        space_available_size: number;
-        physical_space_size: number;
-    }
-
-    //** Signifies if the --zap_code_space option is enabled or not.  1 == enabled, 0 == disabled. */
-    type DoesZapCodeSpaceFlag = 0 | 1;
-
-    interface HeapInfo {
-        total_heap_size: number;
-        total_heap_size_executable: number;
-        total_physical_size: number;
-        total_available_size: number;
-        used_heap_size: number;
-        heap_size_limit: number;
-        malloced_memory: number;
-        peak_malloced_memory: number;
-        does_zap_garbage: DoesZapCodeSpaceFlag;
-    }
-
-    export function getHeapStatistics(): HeapInfo;
-    export function getHeapSpaceStatistics(): HeapSpaceInfo[];
-    export function setFlagsFromString(flags: string): void;
-}
-
-declare module "timers" {
-    export function setTimeout(callback: (...args: any[]) => void, ms: number, ...args: any[]): NodeJS.Timer;
-    export function clearTimeout(timeoutId: NodeJS.Timer): void;
-    export function setInterval(callback: (...args: any[]) => void, ms: number, ...args: any[]): NodeJS.Timer;
-    export function clearInterval(intervalId: NodeJS.Timer): void;
-    export function setImmediate(callback: (...args: any[]) => void, ...args: any[]): any;
-    export function clearImmediate(immediateId: any): void;
-}
-
-declare module "console" {
-    export = console;
-}
-
-/**
- * _debugger module is not documented.
- * Source code is at https://github.com/nodejs/node/blob/master/lib/_debugger.js
- */
-declare module "_debugger" {
-    export interface Packet {
-        raw: string;
-        headers: string[];
-        body: Message;
-    }
-
-    export interface Message {
-        seq: number;
-        type: string;
-    }
-
-    export interface RequestInfo {
-        command: string;
-        arguments: any;
-    }
-
-    export interface Request extends Message, RequestInfo {
-    }
-
-    export interface Event extends Message {
-        event: string;
-        body?: any;
-    }
-
-    export interface Response extends Message {
-        request_seq: number;
-        success: boolean;
-        /** Contains error message if success === false. */
-        message?: string;
-        /** Contains message body if success === true. */
-        body?: any;
-    }
-
-    export interface BreakpointMessageBody {
-        type: string;
-        target: number;
-        line: number;
-    }
-
-    export class Protocol {
-        res: Packet;
-        state: string;
-        execute(data: string): void;
-        serialize(rq: Request): string;
-        onResponse: (pkt: Packet) => void;
-    }
-
-    export var NO_FRAME: number;
-    export var port: number;
-
-    export interface ScriptDesc {
-        name: string;
-        id: number;
-        isNative?: boolean;
-        handle?: number;
-        type: string;
-        lineOffset?: number;
-        columnOffset?: number;
-        lineCount?: number;
-    }
-
-    export interface Breakpoint {
-        id: number;
-        scriptId: number;
-        script: ScriptDesc;
-        line: number;
-        condition?: string;
-        scriptReq?: string;
-    }
-
-    export interface RequestHandler {
-        (err: boolean, body: Message, res: Packet): void;
-        request_seq?: number;
-    }
-
-    export interface ResponseBodyHandler {
-        (err: boolean, body?: any): void;
-        request_seq?: number;
-    }
-
-    export interface ExceptionInfo {
-        text: string;
-    }
-
-    export interface BreakResponse {
-        script?: ScriptDesc;
-        exception?: ExceptionInfo;
-        sourceLine: number;
-        sourceLineText: string;
-        sourceColumn: number;
-    }
-
-    export function SourceInfo(body: BreakResponse): string;
-
-    export interface ClientInstance extends NodeJS.EventEmitter {
-        protocol: Protocol;
-        scripts: ScriptDesc[];
-        handles: ScriptDesc[];
-        breakpoints: Breakpoint[];
-        currentSourceLine: number;
-        currentSourceColumn: number;
-        currentSourceLineText: string;
-        currentFrame: number;
-        currentScript: string;
-
-        connect(port: number, host: string): void;
-        req(req: any, cb: RequestHandler): void;
-        reqFrameEval(code: string, frame: number, cb: RequestHandler): void;
-        mirrorObject(obj: any, depth: number, cb: ResponseBodyHandler): void;
-        setBreakpoint(rq: BreakpointMessageBody, cb: RequestHandler): void;
-        clearBreakpoint(rq: Request, cb: RequestHandler): void;
-        listbreakpoints(cb: RequestHandler): void;
-        reqSource(from: number, to: number, cb: RequestHandler): void;
-        reqScripts(cb: any): void;
-        reqContinue(cb: RequestHandler): void;
-    }
-
-    export var Client : {
-        new (): ClientInstance
-    }
+    export = NodeJS.V8;
 }
