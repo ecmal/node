@@ -9,9 +9,10 @@
   "homepage"       : "https://github.com/ecmal/node",
   "bugs"           : "https://github.com/ecmal/node/issues",
   "keywords"       : ["typescript","ecmal","std","node"],
-   "types"         : "index.d.ts",
-   "dependencies"  : {
-     "@ecmal/core" : "latest"
-   },
-   "engines"       : {}
+  "types"          : "index.d.ts",
+  "bundle"         : true,
+  "engines"        : {},
+  "dependencies"   : {
+    "@ecmal/core"  : "latest"
+  }  
 }
