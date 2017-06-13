@@ -1,6 +1,6 @@
 {
   "name"           : "@ecmal/node",
-  "version"        : "0.0.1",
+  "version"        : "0.0.2",
   "description"    : "Node JS Definition",
   "license"        : "UNLICENSED",
   "author"         : "Mamble Inc. <ecmal@mamble.co>",
@@ -12,7 +12,15 @@
   "types"          : "index.d.ts",
   "bundle"         : true,
   "engines"        : {},
+  "scripts"        : {
+      "build"      : "elc package.json",
+      "release"    : "npm publish -f ./out/@ecmal/node"
+  },
+  "directories"    : {
+    "src"          : "./src",
+    "out"          : "./out"
+  },
   "dependencies"   : {
-    "@ecmal/core"  : "latest"
+    "@ecmal/runtime"  : "0.0.2"
   }  
 }

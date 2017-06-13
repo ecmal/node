@@ -1,0 +1,6 @@
+{
+    "compilerOptions": {
+        "declaration": true,
+        "outFile": "../.out/@ecmal/core/index.js"
+    }
+}
